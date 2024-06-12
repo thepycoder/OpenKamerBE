@@ -1,2 +1,4 @@
 pdfs
 .venv
+*.json
+**/__pycache__/**
