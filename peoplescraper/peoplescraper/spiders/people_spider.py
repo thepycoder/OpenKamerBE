@@ -31,7 +31,7 @@ class LinkSpider(scrapy.Spider):
         short_description = response.css("td > p::text").get().strip()
 
         # Fractie regex
-        regex = r"(?<=\()[&\w\s-]+(?=\))"
+        regex = r"(?<=\()[\*&\w\s-]+(?=\))"
         result = re.search(regex, short_description)
         if result:
             fraction = result.group(0)
