@@ -13,9 +13,20 @@ def parse_html_to_nested_dict(html_content):
     nested_dict = defaultdict(lambda: defaultdict(dict))
     multi_fields = [
         "Auteur",
+        "Auteurs",
         "Opvolgend(e) document(en)",
         "Eurovoc descriptoren",
         "Type",
+        "Kalender",
+        "Rapporteur",
+        "Commissie",
+        "Titel",
+        "Staatsblad erratum",
+        "Hoofddocument",
+        "Incident",
+        "Vrije trefwoorden",
+        "Bevoegdheid",
+        "Bevoegheid",
     ]
 
     for tr in soup.find_all("tr"):
@@ -36,11 +47,18 @@ def parse_html_to_nested_dict(html_content):
         # Correct the level when there are ints in the key_stack
         # They point to a list being used as a way to combine duplicate keys
         # like "auteur"
-        amount_of_list_indexes = len(
-            [i for i in key_stack[: level + 1] if isinstance(i, int)]
-        )
-        if key_stack and amount_of_list_indexes:
-            level += amount_of_list_indexes
+        limit = level + 1
+        depth = 0
+        indexes = 0
+        for i in key_stack:
+            if not isinstance(i, int):
+                depth += 1
+            else:
+                indexes += 1
+            if depth == limit:
+                break
+        if key_stack and indexes:
+            level += indexes
 
         # If the current level is the same as the length of the stack
         # replace the latest key with the current key
@@ -78,5 +96,5 @@ for i in tqdm(range(0, 9999)):
     # Parse the HTML and print the result
     nested_dict = parse_html_to_nested_dict(html_content.text)
     if nested_dict:
-        with open(f"stukken/55K{i:04d}.json", "w") as fp:
+        with open(f"parlementaire_stukken/json/55K{i:04d}.json", "w") as fp:
             json.dump(nested_dict, fp)
