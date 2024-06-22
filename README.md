@@ -46,7 +46,7 @@ De verslagen van deze vergadering staan appart: https://www.dekamer.be/kvvcr/sho
 Aangezien het vrij grote bestanden zijn kan je ze eerst als html downloaden lokaal met `get_html.py` voordat je de notebook gebruikt om erdoor te waden.
 
 ## Common
-In het mapje `common` staat code die bedoeld is gebruikt te worden door alle losse scripts. Het bepaald hoe we bepaalde data gaan opslaan in de backend.
+In het mapje `common` staat code die bedoeld is gebruikt te worden door alle losse scripts. Het bepaalt hoe we data gaan opslaan in de backend.
 Specifiek zijn hier al een aantal regels, wanneer deze niet voldaan worden voor een nieuw script, moet dat aangepast worden en idealiter in deze folder terecht komen.
 
 ### Regels
@@ -55,9 +55,9 @@ Namen:
 - Accenten en speciale tekens worden gestript met [unidecode](https://pypi.org/project/Unidecode/)
 
 Partijen:
-- Wanneer naamsverandering (e.g. SP.A naar Vooruit) worden alle parlementairen tot de nieuwe naam gerekend, ook al is hun pagina niet ge-updated
+- Wanneer er een naamsverandering is (e.g. SP.A naar Vooruit) worden alle parlementairen tot de nieuwe naam gerekend, ook al is hun pagina niet ge-updated
 - Partijen specifiek genaamd in Brussel (e.g. PTB*PVDA enkel voor Brussel, anders PTB of PVDA appart) wordt gerekend tot de waalse partij
 
 
 ## Funny
-Er is een mapje `funny` waar je screenshots van grapige passages in kan droppen
+Er is een mapje `funny` waar je screenshots van grappige passages in kan droppen
