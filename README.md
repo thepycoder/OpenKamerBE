@@ -7,6 +7,11 @@ Deze hele repo is very WIP en is een collectie losse scriptjes die onderzoekend 
 # Technisch
 Alles werkt met Python. Package management wordt gedaan door [PDM](https://pdm-project.org/en/latest/). Lees de documentatie van PDM over hoe je packages moet toevoegen/verwijderen etc. https://pdm-project.org/latest/usage/dependency/
 
+```
+git clone git@github.com:thepycoder/OpenKamerBE.git
+cd OpenKamerBE
+pdm install
+```
 
 # Data Loaders
 ## Parlementairen: De mensen van het parlement
