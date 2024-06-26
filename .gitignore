@@ -2,7 +2,8 @@ pdfs
 .venv
 *.json
 **/__pycache__/**
-**/.DS_Store/
+**/.DS_Store/**
+.DS_Store/**
 src/plenaire/html
 src/mensen/html
 
