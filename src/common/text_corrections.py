@@ -3,10 +3,12 @@
 from unidecode import unidecode
 
 
-def fix_name(name):
+def fix_name(name, swap_first_last_name):
     """Define a number of rules that fix the names into a format that will fit downstream analysis"""
     # These special cases are quite simply written wrongly sometimes
     name = name.replace("Flahaux André", "Flahaut André")
+    if name == "Wollants Ber":
+        name = "Wollants Bert"
     # For some reason some names end with a .
     name = name.replace(".", "")
     # Get rid of accents, sometimes they're typed in the reports, but sometimes forgotten
@@ -14,7 +16,8 @@ def fix_name(name):
     # Unidecode gets rid of any special characters like accents or umlauts and simply replaces it with the basic letter (e.g. Ç becomes C)
     name = unidecode(name)
     # Split the name and reorder first and last names
-    name = " ".join(name.split()[1:]) + " " + name.split()[0]
+    if swap_first_last_name and len(name.split()) > 1:
+        name = " ".join(name.split()[1:]) + " " + name.split()[0]
     return name
 
 
