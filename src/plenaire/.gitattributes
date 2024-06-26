@@ -1,0 +1,5 @@
+# Committing notebook without output while keeping local changes intact. (explore was 200mb)
+# Thanks https://gist.github.com/33eyes/431e3d432f73371509d176d0dfb95b6e
+*.ipynb filter=strip-notebook-output  
+
+# To make this work, run $ git config filter.strip-notebook-output.clean 'jupyter nbconvert --ClearOutputPreprocessor.enabled=True --to=notebook --stdin --stdout --log-level=ERROR'  
