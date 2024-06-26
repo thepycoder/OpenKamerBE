@@ -61,3 +61,7 @@ Partijen:
 
 ## Funny
 Er is een mapje `funny` waar je screenshots van grappige passages in kan droppen
+
+
+# Eurovoc
+https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://eurovoc.europa.eu/100141
