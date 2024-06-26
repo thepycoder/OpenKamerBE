@@ -42,7 +42,7 @@ def scrape_members():
         # Collect data
         members_data.append(
             {
-                "name": fix_name(member_soup.select_one("center > h2").text),
+                "name": member_soup.select_one("center > h2").text,
                 "image_url": member_soup.select_one("td > img")["src"]
                 if member_soup.select_one("td > img")
                 else None,
