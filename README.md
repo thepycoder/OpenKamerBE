@@ -19,11 +19,12 @@ Er is een scraper die informatie over alle parlementariers scraped via deze link
 
 Er zijn altijd 150 parlementariers, maar op de webpagina staan er 188 omdat er soms mensen stoppen, gewisseld worden etc.
 
-De code hiervoor staat onder `mensen` en is een [scrapy](https://scrapy.org/) project.
+De code hiervoor staat onder `mensen`. `get_html.py` is made to download the raw html, which lowers the load the dekamer.be while doing frequent iterations. It can take a while because an IP can easily be blocked. `get_people.py` then runs on the htmls files and extracts the people info into JSON.
 
 ```
 cd mensen
-scrapy crawl people_spider -o output.json
+python get_html.py
+python get_people.py
 ```
 
 ## Parlementaire Stukken
