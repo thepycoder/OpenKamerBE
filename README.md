@@ -1,6 +1,8 @@
 # Parlementaire Dataset
 Deze repository heeft tot doel een reeks hulpmiddelen te bieden voor het verzamelen, parseren en koppelen van gegevens geproduceerd door het Belgische Federale Parlement (dekamer.be).
 
+Het project neemt veel inspiratie van [openkamer]() onze nederlands tegenhanger, maar we hebben geen API voor de kamer van Belgie. Deze repo is dus een eerste aanzet tot het maken van de scrapers, parsers en scripts nodig om dezelfde info uit de ruwe rapportering van de kamer te halen.
+
 # Very WIP
 Deze hele repo is very WIP en is een collectie losse scriptjes die onderzoekend en exploratief zijn bedoeld om te bewijzen dat de data te parsen is. Een volgende stap zet alles dat hierdoor geleerd wordt samen tot een mooier geheel
 
