@@ -6,6 +6,8 @@ pdfs
 .DS_Store/**
 src/plenaire/html
 src/mensen/html
+*.rdf
+plots
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

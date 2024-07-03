@@ -2,6 +2,8 @@
 Deze repository heeft tot doel een reeks hulpmiddelen te bieden voor het verzamelen, parseren en koppelen van gegevens geproduceerd door het Belgische Federale Parlement (dekamer.be). 
 Een gedetailleerde toelichting van de types documenten is hier terug te vinden: https://www.dekamer.be/kvvcr/showpage.cfm?section=/searchlist&language=nl&html=/site/wwwroot/searchlist/typedocN.html#item0-overview
 
+Het project neemt veel inspiratie van [openkamer]() onze nederlands tegenhanger, maar we hebben geen API voor de kamer van Belgie. Deze repo is dus een eerste aanzet tot het maken van de scrapers, parsers en scripts nodig om dezelfde info uit de ruwe rapportering van de kamer te halen.
+
 # Very WIP
 Deze hele repo is very WIP en is een collectie losse scriptjes die onderzoekend en exploratief zijn bedoeld om te bewijzen dat de data te parsen is. Een volgende stap zet alles dat hierdoor geleerd wordt samen tot een mooier geheel
 
@@ -20,11 +22,12 @@ Er is een scraper die informatie over alle parlementariers scraped via deze link
 
 Er zijn altijd 150 parlementariers, maar op de webpagina staan er 188 omdat er soms mensen stoppen, gewisseld worden etc.
 
-De code hiervoor staat onder `mensen` en is een [scrapy](https://scrapy.org/) project.
+De code hiervoor staat onder `mensen`. `get_html.py` is made to download the raw html, which lowers the load the dekamer.be while doing frequent iterations. It can take a while because an IP can easily be blocked. `get_people.py` then runs on the htmls files and extracts the people info into JSON.
 
 ```
 cd mensen
-scrapy crawl people_spider -o output.json
+python get_html.py
+python get_people.py
 ```
 
 ## Parlementaire Stukken
@@ -62,3 +65,7 @@ Partijen:
 
 ## Funny
 Er is een mapje `funny` waar je screenshots van grappige passages in kan droppen
+
+
+# Eurovoc
+https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://eurovoc.europa.eu/100141
