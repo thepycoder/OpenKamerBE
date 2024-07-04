@@ -1,5 +1,6 @@
 # Parlementaire Dataset
-Deze repository heeft tot doel een reeks hulpmiddelen te bieden voor het verzamelen, parseren en koppelen van gegevens geproduceerd door het Belgische Federale Parlement (dekamer.be).
+Deze repository heeft tot doel een reeks hulpmiddelen te bieden voor het verzamelen, parseren en koppelen van gegevens geproduceerd door het Belgische Federale Parlement (dekamer.be). 
+Een gedetailleerde toelichting van de types documenten is hier terug te vinden: https://www.dekamer.be/kvvcr/showpage.cfm?section=/searchlist&language=nl&html=/site/wwwroot/searchlist/typedocN.html#item0-overview
 
 Het project neemt veel inspiratie van [openkamer]() onze nederlands tegenhanger, maar we hebben geen API voor de kamer van Belgie. Deze repo is dus een eerste aanzet tot het maken van de scrapers, parsers en scripts nodig om dezelfde info uit de ruwe rapportering van de kamer te halen.
 
