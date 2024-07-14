@@ -1,11 +1,10 @@
 from copy import copy
-from dataclasses import asdict, dataclass, field, fields
+from dataclasses import dataclass, field, fields
 from datetime import datetime
 import json
-import logging
 import os
 import re
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Dict, List, Optional, Tuple, Union
 
 from bs4 import BeautifulSoup
 import bs4
@@ -17,7 +16,6 @@ from plenaire.identifiers import (
     is_naamstemming_details,
     is_section,
     is_subject,
-    is_votecounts_table,
     re_vote_nr,
     re_detail_vote_nr,
     re_vote_count,

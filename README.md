@@ -2,7 +2,7 @@
 Deze repository heeft tot doel een reeks hulpmiddelen te bieden voor het verzamelen, parseren en koppelen van gegevens geproduceerd door het Belgische Federale Parlement (dekamer.be). 
 Een gedetailleerde toelichting van de types documenten is hier terug te vinden: https://www.dekamer.be/kvvcr/showpage.cfm?section=/searchlist&language=nl&html=/site/wwwroot/searchlist/typedocN.html#item0-overview
 
-Het project neemt veel inspiratie van [openkamer]() onze nederlands tegenhanger, maar we hebben geen API voor de kamer van Belgie. Deze repo is dus een eerste aanzet tot het maken van de scrapers, parsers en scripts nodig om dezelfde info uit de ruwe rapportering van de kamer te halen.
+Het project neemt veel inspiratie van [openkamer](https://www.openkamer.org/) onze nederlands tegenhanger, maar we hebben geen API voor de kamer van Belgie. Deze repo is dus een eerste aanzet tot het maken van de scrapers, parsers en scripts nodig om dezelfde info uit de ruwe rapportering van de kamer te halen.
 
 # Very WIP
 Deze hele repo is very WIP en is een collectie losse scriptjes die onderzoekend en exploratief zijn bedoeld om te bewijzen dat de data te parsen is. Een volgende stap zet alles dat hierdoor geleerd wordt samen tot een mooier geheel
@@ -15,6 +15,20 @@ git clone git@github.com:thepycoder/OpenKamerBE.git
 cd OpenKamerBE
 pdm install
 ```
+
+De TL:DR; van PDM is:
+1. `pyproject.toml` is bascially de requirements.txt equivalent, de `pdm.lock` file is de "uitgerekende" lijst van packages en dependencies die moeten gesinstalleerd worden. De flow is meestal: `pyproject.toml` -> `pdm.lock` -> environment
+2. "Uitgerekend" betekend hier: zien dat alle versies van alle packages en hun dependiencies samen kunnen bestaan. bvb pkg1: pandas>2 en pkg2: pandas<2 zou nie gaan.
+3. Command flow:
+- Een nieuwe package toevoegen:
+```pdm add <package>```
+- Een package verwijderen:
+```pdm remove <package>```
+- Je lokale environment updaten met een nieuwe (via git most likely) `pdm.lock` file
+```pdm sync```
+- Nadat je bvb handmatig iets in `pyproject.toml` hebt toegevoegd, opnieuw uitrekenen naar nieuwe lockfile
+```pdm lock```
+
 
 # Data Loaders
 ## Parlementairen: De mensen van het parlement
@@ -46,8 +60,11 @@ fiche: https://www.dekamer.be/kvvcr/showpage.cfm?section=flwb&language=nl&cfm=/s
 In de plenaire vergadering wordt op deze stukken gestemd indien het zover is. Dit is mogelijks de belangrijkste moment: het bepaalt welke wetgeving in actie treedt.
 De verslagen van deze vergadering staan appart: https://www.dekamer.be/kvvcr/showpage.cfm?section=/cricra&language=nl&cfm=dcricra.cfm?type=plen&cricra=CRI&count=all&legislat=55
 
-`plenaire/explore.ipynb` laat zien hoe deze data kan geparsed worden. Specifiek om de stemmingen ook in JSON formaat te krijgen, zodat ze kunnen gelinkt worden aan de parlementaire stukken en mensen json's.
-Aangezien het vrij grote bestanden zijn kan je ze eerst als html downloaden lokaal met `get_html.py` voordat je de notebook gebruikt om erdoor te waden.
+```
+cd plenaire
+python get_html.py
+python get_plenaire.py
+```
 
 ## Common
 In het mapje `common` staat code die bedoeld is gebruikt te worden door alle losse scripts. Het bepaalt hoe we data gaan opslaan in de backend.
@@ -57,9 +74,9 @@ Specifiek zijn hier al een aantal regels, wanneer deze niet voldaan worden voor 
 Namen:
 - Volgorde: Achternaam Voornaam
 - Accenten en speciale tekens worden gestript met [unidecode](https://pypi.org/project/Unidecode/)
+- Gebruik of extend `fix_name` functie in `common`
 
 Partijen:
-- Wanneer er een naamsverandering is (e.g. SP.A naar Vooruit) worden alle parlementairen tot de nieuwe naam gerekend, ook al is hun pagina niet ge-updated
 - Partijen specifiek genaamd in Brussel (e.g. PTB*PVDA enkel voor Brussel, anders PTB of PVDA appart) wordt gerekend tot de waalse partij
 
 
