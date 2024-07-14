@@ -1,5 +1,5 @@
 # Some regexes
-re_vote_nr = r"\(stemming\/vote(?:\s|&nbsp;)* *\d+\)"
+re_vote_nr = r"\(stemming\/vote(?:\s|&nbsp;)* *\d+(?:\s|&nbsp;)*\)"
 re_detail_vote_nr = r"Vote[\s| ]*nominatif[\s| ]*-[\s| ]*Naamstemming:[\s| ]*(\d*)"
 re_vote_count = r"(Oui|Ja|Non|Nee|Abstentions|Onthoudingen)[\s| ]*(\d*)[\s| ]*(?:Oui|Ja|Non|Nee|Abstentions|Onthoudingen)"
 
