@@ -46,7 +46,8 @@ def parse_votes_table(tag, session_id: str, nr_within_session: int, debug: bool 
         if i == 1:
             # Check whether we are counting taalgroepen separately:
             taalgroepen = ("F" in "_".join(row_data)) and ("N" in "_".join(row_data))
-            continue
+            if taalgroepen:
+                continue
 
         # if (
         #     debug

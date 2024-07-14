@@ -1,5 +1,5 @@
 from copy import copy
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass, field, fields
 from datetime import datetime
 import json
 import logging
@@ -36,6 +36,38 @@ class Vote:
     nay: List[str] = field(default_factory=lambda: [])
     dunno: List[str] = field(default_factory=lambda: [])
     srcfile: Union[str, os.PathLike[str]] = ""
+
+    def to_dict(self) -> dict:
+        """Serializes the object to a dictionary."""
+        return {
+            field.name: self._serialize(getattr(self, field.name))
+            for field in fields(self)
+        }
+
+    @staticmethod
+    def _serialize(value):
+        """Helper function to serialize datetime and PathLike objects into JSON serializable formats."""
+        if isinstance(value, datetime):
+            return value.isoformat()
+        if isinstance(value, os.PathLike):
+            return os.fspath(value)
+        return value
+
+    @classmethod
+    def from_dict(cls, dictionary: dict):
+        """Deserializes a dictionary to a Vote object."""
+        return cls(
+            **{key: cls._deserialize(key, value) for key, value in dictionary.items()}
+        )
+
+    @staticmethod
+    def _deserialize(key, value):
+        """Helper function to deserialize specific fields from dictionary to their correct types."""
+        if key == "date" and value is not None:
+            return datetime.fromisoformat(value)
+        if key == "srcfile" and value:
+            return os.path.normpath(value)
+        return value
 
 
 def html_to_soup(file_path: str):
@@ -116,9 +148,9 @@ def naamstemming_to_votes(
                 #     # )
                 #     pass
                 # Overwrite the votecountstable inhereted from the previous voting session in this section.
-                current_vote.summarized_vote = parse_votes_table(
-                    tag, session_id, len(votes)
-                )
+                summarized_vote = parse_votes_table(tag, session_id, number)
+                if summarized_vote:
+                    current_vote.summarized_vote = summarized_vote
 
             last_tag_was_subject = False
 
@@ -194,7 +226,11 @@ def extend_votes_with_date(votes: Dict[Tuple[str, int], Vote], document_date: da
 
 
 def close_vote_and_start_new(Vote, votes, session_id, srcfile, current_vote, tag_text):
-    if current_vote.subject and current_vote.nr_within_session != -1:
+    if (
+        current_vote.subject
+        and current_vote.nr_within_session != -1
+        and (session_id, current_vote.nr_within_session) not in votes
+    ):
         votes[(session_id, current_vote.nr_within_session)] = copy(current_vote)
     current_vote = Vote(session_id=session_id, srcfile=srcfile, subject=tag_text + "\n")
     return current_vote
@@ -235,6 +271,6 @@ def main(html_dir: str = "html", offset: int = 0, amount: int = 309):
 
 if __name__ == "__main__":
     votes = main(html_dir="src/plenaire/html")
-    with open("test.json", "w") as fp:
+    with open("votes.json", "w") as fp:
         # Use default=str to stringify everything that's not json serializable (like datetime)
-        json.dump([asdict(v) for v in votes.values()], fp, default=str)
+        json.dump([v.to_dict() for v in votes.values()], fp, indent=4)
