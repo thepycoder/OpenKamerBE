@@ -1,11 +1,7 @@
-import json
-
-from plenaire.get_plenaire import Vote
+from common.io_utils import get_votes
 
 
-with open("votes.json", "r") as fp:
-    votes_dicts = json.load(fp)
-    votes = [Vote.from_dict(vote_dict) for vote_dict in votes_dicts]
+votes = get_votes()
 
 votes_with_mistakes = {}
 votes_with_error = {}
