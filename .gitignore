@@ -10,6 +10,8 @@ src/plenaire/html
 src/mensen/html
 *.rdf
 plots
+src/parlementaire_stukken/json
+src/parlementaire_stukken/html
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

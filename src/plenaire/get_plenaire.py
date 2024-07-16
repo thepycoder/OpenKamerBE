@@ -11,6 +11,7 @@ from bs4 import BeautifulSoup
 import bs4
 from tqdm import tqdm
 
+from common.io_utils import html_to_soup
 from common.objects import Vote
 from common.text_corrections import fix_name
 from plenaire.identifiers import (
@@ -24,14 +25,6 @@ from plenaire.identifiers import (
     re_vote_count,
 )
 from plenaire.parsers import parse_date, parse_votes_table
-
-
-def html_to_soup(file_path: str):
-    # Open and read the HTML file
-    with open(file_path, "r", encoding="latin-1") as file:
-        # Create a BeautifulSoup object and append it to the list
-        soup = BeautifulSoup(file, "html.parser")
-    return soup
 
 
 def naamstemming_to_votes(

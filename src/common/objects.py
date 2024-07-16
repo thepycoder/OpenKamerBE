@@ -20,6 +20,17 @@ class Member:
 
 
 @dataclass
+class Document:
+    nr: str
+    zitting: str
+    bron: str
+    indieningsdatum: datetime
+    auteurs: List[Member]
+    type: str
+    stemming: str
+
+
+@dataclass
 class Vote:
     session_id: str
     date: Optional[datetime] = None
@@ -62,3 +73,14 @@ class Vote:
         if key == "srcfile" and value:
             return os.path.normpath(value)
         return value
+
+
+@dataclass
+class KamerStuk:
+    nr: str
+    sleutel: str
+    titel: str
+    zittingsperiode: int
+    hoofddocument: Document
+    eurovoc_descriptor: str
+    stemming_kamer: Vote
